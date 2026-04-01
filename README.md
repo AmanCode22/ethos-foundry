@@ -4,7 +4,7 @@ Hard Traits registry for Ethos.
 
 Use Forge to install native C/C++/Rust extensions. Hosted on Cloudflare Pages.
 
-**Important:** Every Hard Trait must support **all platforms** — Linux, macOS, Windows, and Termux. No exceptions.
+**Important:** Every Hard Trait must support **all platforms** — Linux, macOS, Windows, and Termux. If yours does not support then first open a issue otherwise your pr would be rejected.
 
 ## Quick use
 
