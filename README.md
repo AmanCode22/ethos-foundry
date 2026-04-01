@@ -4,6 +4,8 @@ Hard Traits registry for Ethos.
 
 Use Forge to install native C/C++/Rust extensions. Hosted on Cloudflare Pages.
 
+**Important:** Every Hard Trait must support **all platforms** — Linux, macOS, Windows, and Termux. No exceptions.
+
 ## Quick use
 
 Search:
@@ -31,10 +33,12 @@ say result.
 ## How this works
 
 1. You write a Hard Trait using one of the template repos (C, C++, or Rust).
-2. The template has GitHub Actions that build binaries for Linux, macOS, Windows, and Termux automatically.
+2. The template has GitHub Actions that build binaries for **all 7 platforms** automatically (Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, Windows, Termux ARM64, Termux ARMv7).
 3. You tag a release → binaries go to GitHub Releases.
 4. A GitHub Action automatically opens a PR to this repo with your `manifest.json`.
 5. I review it. If it looks good, I merge it. Done.
+
+**Note:** Traits that don't support all platforms will not be accepted. This ensures every user can use every trait, no matter their device.
 
 ## Adding your trait
 
@@ -45,13 +49,13 @@ Pick your language:
 - C++: https://github.com/AmanCode22/ethos-trait-cpp (maintained by me)
 - Rust: https://github.com/AmanCode22/ethos-trait-rust (maintained by me)
 
-If you wanna contribute by making api for other languages then open a issue with the repo link containing the api similar to above and I would put them here!
+If you wanna contribute by making API for other languages then open an issue with the repo link containing the API similar to above and I would put them here!
 
-These repos have starter code, build config, and CI workflows. They compile for all platforms automatically when you tag a release.
+These repos have starter code, build config, and CI workflows. They compile for **all 7 platforms** automatically when you tag a release. You don't need to build anything locally.
 
 **Step 2 — Build and release**
 
-Write your code. Push. Tag a release like `v1.0.0`. The workflows build binaries and upload them to GitHub Releases automatically.
+Write your code. Push. Tag a release like `v1.0.0`. The workflows build binaries for all platforms and upload them to GitHub Releases automatically.
 
 **Step 3 — PR opens automatically**
 
@@ -66,7 +70,7 @@ I review the PR personally. If it passes, I merge it. Your trait goes live on Fo
 When you release a new version:
 
 1. Update your trait repo and tag a new release (e.g., `v2.0.0`).
-2. The CI builds new binaries and uploads them.
+2. The CI builds new binaries for all platforms and uploads them.
 3. A new PR opens automatically to this repo with the updated `manifest.json`.
 4. I review and merge. Users get the latest version when they run `forge foundry get`.
 
@@ -81,7 +85,7 @@ Required:
 - `author` — your name or handle
 - `repository` — link to your trait's source repo
 - `license` — MIT, Apache-2.0, etc.
-- `platforms` — object with one entry per OS you support
+- `platforms` — object with **all 7 platform entries** (see below)
 - `platforms.<os>.url` — direct link to the binary on GitHub Releases
 - `platforms.<os>.checksum` — `sha256:<hash>` of that binary
 - `functions` — list of functions Ethos can call
@@ -109,13 +113,14 @@ bool, void
 ## Rules
 
 - Folder name must equal `manifest.name`
+- **All 7 platforms must be supported** — no partial support
 - No binaries in this repo — use GitHub Releases
 - All URLs must be public
 - Checksums are mandatory (SHA256)
 
-## Platforms
+## Platforms (All Required)
 
-Forge picks the right binary automatically:
+Every trait must include binaries for all of these:
 
 | Tag | OS | Arch | Extension |
 |-----|----|------|-----------|
@@ -126,6 +131,8 @@ Forge picks the right binary automatically:
 | windows-x86_64 | Windows | x86_64 | .dll |
 | termux-aarch64 | Android/Termux | ARM64 | .so |
 | termux-armv7 | Android/Termux | ARMv7 | .so |
+
+If your trait can't build on one of these, fix your code or don't submit. Cross-platform support is not optional.
 
 ## Links
 
