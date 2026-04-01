@@ -44,7 +44,8 @@ Pick your language:
 - C: https://github.com/AmanCode22/ethos-trait-c (maintained by me)
 - C++: https://github.com/AmanCode22/ethos-trait-cpp (maintained by me)
 - Rust: https://github.com/AmanCode22/ethos-trait-rust (maintained by me)
-  If you wanna contribute by making api for other languages then open a issue with the repo link containing the api similar to above and I would put them here!
+
+If you wanna contribute by making api for other languages then open a issue with the repo link containing the api similar to above and I would put them here!
 
 These repos have starter code, build config, and CI workflows. They compile for all platforms automatically when you tag a release.
 
