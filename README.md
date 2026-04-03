@@ -33,7 +33,7 @@ say result.
 ## How this works
 
 1. You write a Hard Trait using one of the template repos (C, C++, or Rust).
-2. The template has GitHub Actions that build binaries for **all 7 platforms** automatically (Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, Windows, Termux ARM64, Termux ARMv7).
+2. The template has GitHub Actions that build binaries for **all 8 platforms** automatically (Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, Windows arm64, windows x86_64, Termux ARM64, Termux ARMv7).
 3. You tag a release → binaries go to GitHub Releases.
 4. A GitHub Action automatically opens a PR to this repo with your `manifest.json`.
 5. I review it. If it looks good, I merge it. Done.
@@ -51,7 +51,7 @@ Pick your language:
 
 If you wanna contribute by making API for other languages then open an issue with the repo link containing the API similar to above and I would put them here!
 
-These repos have starter code, build config, and CI workflows. They compile for **all 7 platforms** automatically when you tag a release. You don't need to build anything locally.
+These repos have starter code, build config, and CI workflows. They compile for **all 8 platforms** automatically when you tag a release. You don't need to build anything locally.
 
 **Step 2 — Build and release**
 
@@ -128,11 +128,12 @@ Every trait must include binaries for all of these:
 | linux-aarch64 | Linux | ARM64 | .so |
 | macos-arm64 | macOS | Apple Silicon | .dylib |
 | macos-x86_64 | macOS | Intel | .dylib |
-| windows-x86_64 | Windows | x86_64 | .dll |
+| windows | Windows | x86_64 | .dll |
+| windows-arm64 | Windows | arm64 | .dll |
 | termux-aarch64 | Android/Termux | ARM64 | .so |
 | termux-armv7 | Android/Termux | ARMv7 | .so |
 
-If your trait can't build on one of these, fix your code or don't submit. Cross-platform support is not optional.
+If your trait can't build on one of these, open issue first then submit.
 
 ## Links
 
