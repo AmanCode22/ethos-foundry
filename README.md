@@ -85,7 +85,7 @@ Required:
 - `author` — your name or handle
 - `repository` — link to your trait's source repo
 - `license` — MIT, Apache-2.0, etc.
-- `platforms` — object with **all 7 platform entries** (see below)
+- `platforms` — object with **all 8 platform entries** (see below)
 - `platforms.<os>.url` — direct link to the binary on GitHub Releases
 - `platforms.<os>.checksum` — `sha256:<hash>` of that binary
 - `functions` — list of functions Ethos can call
@@ -113,7 +113,7 @@ bool, void
 ## Rules
 
 - Folder name must equal `manifest.name`
-- **All 7 platforms must be supported** — no partial support, or else open a issue first else PR would be rejected
+- **All 8 platforms must be supported** — no partial support, or else open a issue first else PR would be rejected
 - No binaries in this repo — use GitHub Releases
 - All URLs must be public
 - Checksums are mandatory (SHA256)
