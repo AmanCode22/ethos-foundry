@@ -38,7 +38,7 @@ say result.
 4. A GitHub Action automatically opens a PR to this repo with your `manifest.json`.
 5. I review it. If it looks good, I merge it. Done.
 
-**Note:** Traits that don't support all platforms will not be accepted. This ensures every user can use every trait, no matter their device.
+**Note:** Traits that don't support all platforms will not be accepted. This ensures every user can use every trait, no matter their device. Or else open a issue first else PR would be rejected.
 
 ## Adding your trait
 
@@ -113,7 +113,7 @@ bool, void
 ## Rules
 
 - Folder name must equal `manifest.name`
-- **All 7 platforms must be supported** — no partial support
+- **All 7 platforms must be supported** — no partial support, or else open a issue first else PR would be rejected
 - No binaries in this repo — use GitHub Releases
 - All URLs must be public
 - Checksums are mandatory (SHA256)
