@@ -35,7 +35,7 @@ say result.
 1. You write a Hard Trait using one of the template repos (C, C++, or Rust).
 2. The template has GitHub Actions that build binaries for **all 8 platforms** automatically (Linux x86_64, Linux ARM64, macOS Intel, macOS Apple Silicon, Windows arm64, windows x86_64, Termux ARM64, Termux ARMv7).
 3. You tag a release → binaries go to GitHub Releases.
-4. A GitHub Action automatically opens a PR to this repo with your `manifest.json`.
+4. Open a PR to foundry → You must open a pr to foundry for each version bump also, you can find manifest.json in releases use that for PR as that is different.
 5. I review it. If it looks good, I merge it. Done.
 
 **Note:** Traits that don't support all platforms will not be accepted. This ensures every user can use every trait, no matter their device. Or else open a issue first else PR would be rejected.
@@ -57,9 +57,9 @@ These repos have starter code, build config, and CI workflows. They compile for 
 
 Write your code. Push. Tag a release like `v1.0.0`. The workflows build binaries for all platforms and upload them to GitHub Releases automatically.
 
-**Step 3 — PR opens automatically**
+**Step 3 — Open PR**
 
-The template's GitHub Action detects your new release and opens a PR to this repo with your `manifest.json`. You don't need to do anything.
+Github workflow auto creates manifest.json for pr you just need to use that and done.
 
 **Step 4 — Review and merge**
 
@@ -71,10 +71,10 @@ When you release a new version:
 
 1. Update your trait repo and tag a new release (e.g., `v2.0.0`).
 2. The CI builds new binaries for all platforms and uploads them.
-3. A new PR opens automatically to this repo with the updated `manifest.json`.
+3.You opens a PR to this repo with the updated `manifest.json`.
 4. I review and merge. Users get the latest version when they run `forge foundry get`.
 
-You don't need to do anything extra. Just tag a release.
+You don't need to do anything extra. Just tag a release and open a PR.
 
 ## manifest.json fields
 
