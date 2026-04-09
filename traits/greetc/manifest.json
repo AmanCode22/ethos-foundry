@@ -1,0 +1,55 @@
+{
+  "name": "greetc",
+  "functions": {
+    "greet": {
+      "return": "void",
+      "args": [
+        "char *"
+      ]
+    }
+  },
+  "version": "1.0.0",
+  "description": "A trait for greetc",
+  "submitter": "AmanCode22",
+  "repository": "https://github.com/AmanCode22/ethos-trait-greetc",
+  "license": "MIT",
+  "platforms": {
+    "linux-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-linux-x86_64.so",
+      "checksum": ""
+    },
+    "linux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-linux-arm64.so",
+      "checksum": "sha256:7bbd630364252ed2ab35595b83b5b9d410f7eb20b08c96a317e0e6392e51a1db"
+    },
+    "macos-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-macos-arm64.dylib",
+      "checksum": "sha256:5064a8478e0da38940d2fd567a20c25949255e5ddb06a71df8a0e21a14146205"
+    },
+    "macos-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-macos-intel.dylib",
+      "checksum": "sha256:ca3ca5a7ebf6b8c43c0997886023a90322efe6488dbdfaaf164d225d058e5fa8"
+    },
+    "windows": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-windows-x86_64.dll",
+      "checksum": "sha256:735f01ee2f9414f0dad410362e0195e45b7a12fb48cb23c6fb848bd2280ca12e"
+    },
+    "windows-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-windows-arm64.dll",
+      "checksum": "sha256:647d60fa6206f53dbb2d978f73f6cd80b65b0833ad52edb8d75a877153704217"
+    },
+    "termux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-termux-arm64.so",
+      "checksum": "sha256:3fd47ff31d4998b11f0420eb56b64322273ad7803e9d6a8c49622c77ee0a1032"
+    },
+    "termux-armv7": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-termux-armv7.so",
+      "checksum": "sha256:dc0bd0f29c265ad8e7a7ef17e935eb53f3506a376a0546ce26ea06de07dbb4e9"
+    }
+  },
+  "tags": [
+    "greet",
+    "c"
+  ],
+  "verified": false
+}
