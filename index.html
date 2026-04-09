@@ -5,114 +5,219 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ethos Foundry</title>
     <style>
+        :root {
+            --bg: #0d1117;
+            --card: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-dim: #8b949e;
+            --accent: #58a6ff;
+            --accent-hover: #79c0ff;
+            --success-bg: #238636;
+            --success-text: #3fb950;
+            --warning-bg: #9e6a03;
+            --warning-text: #d29922;
+            --code-bg: #010409;
+            --code-text: #ff7b72;
+            --input-bg: #0d1117;
+            --input-border: #30363d;
+            --shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; background: #fafafa; color: #333; }
-        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #1a1a1a; }
-        .subtitle { color: #666; margin-bottom: 30px; font-size: 1.1rem; }
-        .search-box { width: 100%; padding: 12px 16px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 30px; }
-        .search-box:focus { outline: none; border-color: #007bff; }
-        .trait { background: white; border: 1px solid #e0e0e0; padding: 20px; margin-bottom: 15px; border-radius: 8px; }
-        .trait h3 { margin-bottom: 8px; color: #007bff; }
-        .trait h3 small { color: #888; font-weight: normal; font-size: 0.9rem; }
-        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 12px; margin-left: 8px; }
-        .verified { background: #d4edda; color: #155724; }
-        .official { background: #fff3cd; color: #856404; }
-        .trait p { color: #555; margin: 10px 0; }
-        .trait-meta { font-size: 0.9rem; color: #888; }
-        .install-box { background: #f5f5f5; padding: 12px; border-radius: 6px; font-family: "SF Mono", "Fira Code", monospace; font-size: 0.9rem; margin-top: 15px; }
-        .install-box code { color: #d63384; }
-        .loading { text-align: center; color: #666; padding: 40px; }
-        .no-traits { text-align: center; color: #888; padding: 40px; }
-        .footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 0.9rem; }
-        .footer a { color: #007bff; text-decoration: none; }
-        .platforms { margin-top: 10px; font-size: 0.85rem; color: #999; }
-        .platforms span { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; margin-right: 5px; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            max-width: 850px; margin: 0 auto; padding: 40px 20px;
+            background: var(--bg); color: var(--text); line-height: 1.6;
+        }
+        header { margin-bottom: 30px; }
+        h1 { font-size: 2.2rem; margin-bottom: 8px; color: var(--text); font-weight: 600; }
+        .subtitle { color: var(--text-dim); font-size: 1.05rem; }
+        #search {
+            width: 100%; padding: 12px 16px;
+            background: var(--input-bg); border: 1px solid var(--input-border);
+            border-radius: 8px; font-size: 1rem; margin: 25px 0;
+            color: var(--text); transition: border-color 0.2s;
+        }
+        #search:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(88,166,255,0.2); }
+        #search::placeholder { color: var(--text-dim); opacity: 0.8; }
+        .trait {
+            background: var(--card); border: 1px solid var(--border);
+            padding: 20px; margin-bottom: 14px; border-radius: 10px;
+            transition: border-color 0.2s, transform 0.1s;
+        }
+        .trait:hover { border-color: var(--accent); transform: translateY(-1px); }
+        .trait-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }        .trait h3 { color: var(--accent); font-size: 1.25rem; font-weight: 600; }
+        .badge {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 3px 9px; border-radius: 6px; font-size: 11px; font-weight: 500;
+        }
+        .verified { background: var(--success-bg); color: var(--success-text); }
+        .official { background: var(--warning-bg); color: var(--warning-text); }
+        .trait p { color: var(--text-dim); margin: 10px 0; font-size: 0.95rem; }
+        .trait-meta { font-size: 0.9rem; color: var(--text-dim); display: flex; gap: 15px; flex-wrap: wrap; }
+        .trait-meta span { display: flex; align-items: center; gap: 5px; }
+        .install {
+            background: var(--code-bg); padding: 12px 14px; border-radius: 7px;
+            font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+            font-size: 0.9rem; margin-top: 14px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        }
+        .install strong { color: var(--text-dim); }
+        .install code { color: var(--code-text); background: rgba(255,123,114,0.1); padding: 2px 6px; border-radius: 4px; }
+        .install-btn {
+            background: var(--accent); color: #0d1117; border: none;
+            padding: 6px 12px; border-radius: 5px; font-size: 0.85rem;
+            cursor: pointer; font-weight: 500; transition: background 0.2s;
+        }
+        .install-btn:hover { background: var(--accent-hover); }
+        .install-btn:active { transform: scale(0.98); }
+        .loading, .no-traits { text-align: center; color: var(--text-dim); padding: 40px 20px; }
+        .footer {
+            margin-top: 50px; padding-top: 20px;
+            border-top: 1px solid var(--border); color: var(--text-dim);
+            font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;
+        }
+        .footer a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+        .footer a:hover { color: var(--accent-hover); }
+        .footer-links { display: flex; gap: 15px; flex-wrap: wrap; }
+        @media (max-width: 600px) {
+            body { padding: 25px 15px; }
+            h1 { font-size: 1.8rem; }
+            .trait-header { flex-direction: column; align-items: flex-start; }
+            .footer { flex-direction: column; align-items: flex-start; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            * { transition: none !important; animation: none !important; }
+        }
     </style>
 </head>
 <body>
-    <h1>🏭 Ethos Foundry</h1>
-    <p class="subtitle">Hard Traits registry for Ethos. Native C/C++/Rust extensions, pre-built for your platform.</p>
+    <header>
+        <h1>🏭 Ethos Foundry</h1>
+        <p class="subtitle">Hard Traits registry for Ethos. Native C/C++/Rust extensions, pre-built for your platform.</p>
+    </header>
+        <input type="text" id="search" placeholder="Search traits (e.g., math, crypto, network)..." aria-label="Search traits">
     
-    <input type="text" class="search-box" id="search" placeholder="Search traits (e.g., math, crypto, network)...">
-    
-    <div id="traits-list">
+    <div id="list">
         <p class="loading">Loading traits from index.json...</p>
     </div>
 
-    <div class="footer">
-        <p>
-            <a href="https://github.com/AmanCode22/ethos-foundry">GitHub</a> • 
-            <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md">Docs</a> • 
-            <a href="https://github.com/AmanCode22/forge">Forge</a>
-        </p>
-        <p style="margin-top: 10px;">Built by <a href="https://github.com/AmanCode22">Aman</a> (Class 9, India). Solo project.</p>
-    </div>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md" target="_blank" rel="noopener">Docs</a>
+            <a href="https://github.com/AmanCode22/forge" target="_blank" rel="noopener">Forge</a>
+        </div>
+        <span>Built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">Aman</a> (Class 9, India)</span>
+    </footer>
 
     <script>
-        let allTraits = {};
+        let traits = {};
 
-        function renderTraits(traits, filter = '') {
-            const container = document.getElementById('traits-list');
-            container.innerHTML = '';
-            
-            const filtered = Object.entries(traits).filter(([name, trait]) => {
-                if (!filter) return true;
-                const search = filter.toLowerCase();
-                return name.toLowerCase().includes(search) || 
-                       (trait.description && trait.description.toLowerCase().includes(search)) ||
-                       (trait.tags && trait.tags.some(t => t.toLowerCase().includes(search)));
-            });
-
-            if (filtered.length === 0) {
-                container.innerHTML = filter 
-                    ? `<p class="no-traits">No traits match "${filter}"</p>` 
-                    : '<p class="no-traits">No traits published yet.</p>';
-                return;
-            }
-
-            filtered.forEach(([name, trait]) => {
-                const badge = trait.verified 
-                    ? '<span class="badge verified">✅ Verified</span>' 
-                    : trait.tags?.includes('official') 
-                        ? '<span class="badge official">🏆 Official</span>' 
-                        : '';
-                
-                const platforms = trait.platforms ? Object.keys(trait.platforms).slice(0, 4).join(', ') : '';
-                const platformCount = trait.platforms ? Object.keys(trait.platforms).length : 0;
-
-                const html = `
-                    <div class="trait">
-                        <h3>${name} <small>v${trait.version || '1.0.0'}</small> ${badge}</h3>
-                        <p>${trait.description || 'No description provided.'}</p>
-                        <p class="trait-meta">Author: ${trait.author || 'Unknown'}</p>
-                        ${platforms ? `<p class="platforms">Platforms: <span>${platforms}${platformCount > 4 ? ` +${platformCount - 4} more` : ''}</span></p>` : ''}
-                        <div class="install-box">
-                            <strong>Install:</strong><br>
-                            <code>forge foundry get ${name}</code>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += html;
+        function copyInstall(traitName) {
+            const cmd = `forge foundry get ${traitName}`;
+            navigator.clipboard?.writeText(cmd).then(() => {
+                const btn = event.target;
+                const original = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = 'var(--success-bg)';
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.style.background = '';
+                }, 1500);
+            }).catch(() => {
+                // Fallback for older browsers
+                const textarea = document.createElement('textarea');
+                textarea.value = cmd;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                const btn = event.target;
+                const original = btn.textContent;
+                btn.textContent = 'Copied!';
+                btn.style.background = 'var(--success-bg)';
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.style.background = '';
+                }, 1500);
             });
         }
 
+        function render(filter = '') {
+            const el = document.getElementById('list');            const q = filter.trim().toLowerCase();
+            
+            const items = Object.entries(traits).filter(([name, t]) => {
+                if (!q) return true;
+                const desc = (t.description || '').toLowerCase();
+                const tags = (t.tags || []).join(' ').toLowerCase();
+                return name.toLowerCase().includes(q) || desc.includes(q) || tags.includes(q);
+            });
+
+            if (items.length === 0) {
+                el.innerHTML = q 
+                    ? `<p class="no-traits">No traits match "<strong>${filter}</strong>"</p>` 
+                    : '<p class="no-traits">No traits published yet.<br><small>Be the first to submit one!</small></p>';
+                return;
+            }
+
+            el.innerHTML = items.map(([name, t]) => {
+                const badge = t.verified 
+                    ? '<span class="badge verified">✓ Verified</span>' 
+                    : (t.tags || []).includes('official')
+                        ? '<span class="badge official">★ Official</span>' 
+                        : '';
+                
+                const author = t.author || 'Unknown';
+                const desc = t.description || 'No description provided.';
+                
+                return `
+                    <article class="trait">
+                        <div class="trait-header">
+                            <h3>${name}</h3>
+                            ${badge}
+                        </div>
+                        <p>${desc}</p>
+                        <p class="trait-meta">
+                            <span>By ${author}</span>
+                            ${t.version ? `<span>v${t.version}</span>` : ''}
+                        </p>
+                        <div class="install">
+                            <strong>Install:</strong>
+                            <code>forge foundry get ${name}</code>
+                            <button class="install-btn" onclick="copyInstall('${name}')" aria-label="Copy install command">Copy</button>
+                        </div>
+                    </article>
+                `;
+            }).join('');
+        }
+
+        // Load traits from index.json
         fetch('index.json')
-            .then(response => {
-                if (!response.ok) throw new Error('Failed to load index.json');
+            .then(response => {                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 return response.json();
             })
             .then(data => {
-                allTraits = data.traits || {};
-                renderTraits(allTraits);
+                traits = (data && data.traits) || {};
+                render();
             })
-            .catch(err => {
-                document.getElementById('traits-list').innerHTML = 
-                    '<p class="no-traits">Error loading traits. Make sure index.json exists in the repo root.</p>';
-                console.error(err);
+            .catch(error => {
+                console.error('Failed to load index.json:', error);
+                document.getElementById('list').innerHTML = 
+                    '<p class="no-traits">Could not load index.json.<br><small>Make sure the file exists in the repo root.</small></p>';
             });
 
+        // Search filter
         document.getElementById('search').addEventListener('input', (e) => {
-            renderTraits(allTraits, e.target.value);
+            render(e.target.value);
+        });
+
+        // Keyboard shortcut: Ctrl/Cmd + K to focus search
+        document.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+                e.preventDefault();
+                document.getElementById('search').focus();
+            }
         });
     </script>
 </body>
