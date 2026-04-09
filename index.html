@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethos Foundry</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 900px; margin: 0 auto; padding: 40px 20px; background: #fafafa; color: #333; }
+        h1 { font-size: 2.5rem; margin-bottom: 10px; color: #1a1a1a; }
+        .subtitle { color: #666; margin-bottom: 30px; font-size: 1.1rem; }
+        .search-box { width: 100%; padding: 12px 16px; border: 2px solid #ddd; border-radius: 8px; font-size: 1rem; margin-bottom: 30px; }
+        .search-box:focus { outline: none; border-color: #007bff; }
+        .trait { background: white; border: 1px solid #e0e0e0; padding: 20px; margin-bottom: 15px; border-radius: 8px; }
+        .trait h3 { margin-bottom: 8px; color: #007bff; }
+        .trait h3 small { color: #888; font-weight: normal; font-size: 0.9rem; }
+        .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; font-size: 12px; margin-left: 8px; }
+        .verified { background: #d4edda; color: #155724; }
+        .official { background: #fff3cd; color: #856404; }
+        .trait p { color: #555; margin: 10px 0; }
+        .trait-meta { font-size: 0.9rem; color: #888; }
+        .install-box { background: #f5f5f5; padding: 12px; border-radius: 6px; font-family: "SF Mono", "Fira Code", monospace; font-size: 0.9rem; margin-top: 15px; }
+        .install-box code { color: #d63384; }
+        .loading { text-align: center; color: #666; padding: 40px; }
+        .no-traits { text-align: center; color: #888; padding: 40px; }
+        .footer { margin-top: 50px; padding-top: 20px; border-top: 1px solid #ddd; color: #888; font-size: 0.9rem; }
+        .footer a { color: #007bff; text-decoration: none; }
+        .platforms { margin-top: 10px; font-size: 0.85rem; color: #999; }
+        .platforms span { background: #f0f0f0; padding: 2px 6px; border-radius: 3px; margin-right: 5px; }
+    </style>
+</head>
+<body>
+    <h1>🏭 Ethos Foundry</h1>
+    <p class="subtitle">Hard Traits registry for Ethos. Native C/C++/Rust extensions, pre-built for your platform.</p>
+    
+    <input type="text" class="search-box" id="search" placeholder="Search traits (e.g., math, crypto, network)...">
+    
+    <div id="traits-list">
+        <p class="loading">Loading traits from index.json...</p>
+    </div>
+
+    <div class="footer">
+        <p>
+            <a href="https://github.com/AmanCode22/ethos-foundry">GitHub</a> • 
+            <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md">Docs</a> • 
+            <a href="https://github.com/AmanCode22/forge">Forge</a>
+        </p>
+        <p style="margin-top: 10px;">Built by <a href="https://github.com/AmanCode22">Aman</a> (Class 9, India). Solo project.</p>
+    </div>
+
+    <script>
+        let allTraits = {};
+
+        function renderTraits(traits, filter = '') {
+            const container = document.getElementById('traits-list');
+            container.innerHTML = '';
+            
+            const filtered = Object.entries(traits).filter(([name, trait]) => {
+                if (!filter) return true;
+                const search = filter.toLowerCase();
+                return name.toLowerCase().includes(search) || 
+                       (trait.description && trait.description.toLowerCase().includes(search)) ||
+                       (trait.tags && trait.tags.some(t => t.toLowerCase().includes(search)));
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = filter 
+                    ? `<p class="no-traits">No traits match "${filter}"</p>` 
+                    : '<p class="no-traits">No traits published yet.</p>';
+                return;
+            }
+
+            filtered.forEach(([name, trait]) => {
+                const badge = trait.verified 
+                    ? '<span class="badge verified">✅ Verified</span>' 
+                    : trait.tags?.includes('official') 
+                        ? '<span class="badge official">🏆 Official</span>' 
+                        : '';
+                
+                const platforms = trait.platforms ? Object.keys(trait.platforms).slice(0, 4).join(', ') : '';
+                const platformCount = trait.platforms ? Object.keys(trait.platforms).length : 0;
+
+                const html = `
+                    <div class="trait">
+                        <h3>${name} <small>v${trait.version || '1.0.0'}</small> ${badge}</h3>
+                        <p>${trait.description || 'No description provided.'}</p>
+                        <p class="trait-meta">Author: ${trait.author || 'Unknown'}</p>
+                        ${platforms ? `<p class="platforms">Platforms: <span>${platforms}${platformCount > 4 ? ` +${platformCount - 4} more` : ''}</span></p>` : ''}
+                        <div class="install-box">
+                            <strong>Install:</strong><br>
+                            <code>forge foundry get ${name}</code>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += html;
+            });
+        }
+
+        fetch('index.json')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load index.json');
+                return response.json();
+            })
+            .then(data => {
+                allTraits = data.traits || {};
+                renderTraits(allTraits);
+            })
+            .catch(err => {
+                document.getElementById('traits-list').innerHTML = 
+                    '<p class="no-traits">Error loading traits. Make sure index.json exists in the repo root.</p>';
+                console.error(err);
+            });
+
+        document.getElementById('search').addEventListener('input', (e) => {
+            renderTraits(allTraits, e.target.value);
+        });
+    </script>
+</body>
+</html>
