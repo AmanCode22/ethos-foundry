@@ -93,7 +93,7 @@
 </head>
 <body>
     <header>
-        <h1>🏭 Ethos Foundry</h1>
+        <h1>Ethos Foundry</h1>
         <p class="subtitle">Hard Traits registry for Ethos. Native C/C++/Rust extensions, pre-built for your platform.</p>
     </header>
         <input type="text" id="search" placeholder="Search traits (e.g., math, crypto, network)..." aria-label="Search traits">
@@ -126,7 +126,7 @@
                     btn.style.background = '';
                 }, 1500);
             }).catch(() => {
-                // Fallback for older browsers
+            
                 const textarea = document.createElement('textarea');
                 textarea.value = cmd;
                 document.body.appendChild(textarea);
@@ -192,7 +192,7 @@
             }).join('');
         }
 
-        // Load traits from index.json
+        
         fetch('index.json')
             .then(response => {                if (!response.ok) throw new Error(`HTTP ${response.status}`);
                 return response.json();
@@ -207,12 +207,12 @@
                     '<p class="no-traits">Could not load index.json.<br><small>Make sure the file exists in the repo root.</small></p>';
             });
 
-        // Search filter
+        
         document.getElementById('search').addEventListener('input', (e) => {
             render(e.target.value);
         });
 
-        // Keyboard shortcut: Ctrl/Cmd + K to focus search
+        
         document.addEventListener('keydown', (e) => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
                 e.preventDefault();
