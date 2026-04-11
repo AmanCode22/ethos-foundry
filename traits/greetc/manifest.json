@@ -1,4 +1,5 @@
 {
+  "description": "Sample trait written c for greet",
   "name": "greetc",
   "functions": {
     "greet": {
@@ -9,14 +10,13 @@
     }
   },
   "version": "1.0.0",
-  "description": "Sample trait written c for greet",
   "submitter": "AmanCode22",
   "repository": "https://github.com/AmanCode22/ethos-trait-greetc",
   "license": "MIT",
   "platforms": {
     "linux-x86_64": {
       "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-linux-x86_64.so",
-      "checksum": ""
+      "checksum": "sha256:5f059bad6888dcf8a67ce7dfac138ded104bacff0ca20cb9c154a6c603ba8ba2"
     },
     "linux-aarch64": {
       "url": "https://github.com/AmanCode22/ethos-trait-greetc/releases/download/v1.0.0/greetc-linux-arm64.so",
