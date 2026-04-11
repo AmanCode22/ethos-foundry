@@ -1,7 +1,7 @@
 {
   "traits": {
     "greetc": {
-      "description": "Sample trait written c for greet.",
+      "description": "Sample trait written in c for greet.",
       "author": "AmanCode22",
       "manifest_url": "https://ethos-foundry.pages.dev/traits/greetc/manifest.json",
       "verified": true,
