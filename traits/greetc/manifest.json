@@ -1,5 +1,5 @@
 {
-  "description": "Sample trait written c for greet",
+  "description": "Sample trait written in c for greet",
   "name": "greetc",
   "functions": {
     "greet": {
