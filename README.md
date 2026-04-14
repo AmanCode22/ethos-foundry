@@ -45,9 +45,9 @@ say result.
 **Step 1 — Fork a template**
 
 Pick your language:
-- C: https://github.com/AmanCode22/ethos-trait-c (maintained by me)
-- C++: https://github.com/AmanCode22/ethos-trait-cpp (maintained by me)
-- Rust: https://github.com/AmanCode22/ethos-trait-rust (maintained by me)
+- C: https://github.com/AmanCode22/ethos-trait-c-template (maintained by me)
+- C++: https://github.com/AmanCode22/ethos-trait-cpp-template (maintained by me)
+- Rust: https://github.com/AmanCode22/ethos-trait-rust-template (maintained by me)
 
 If you wanna contribute by making API for other languages then open an issue with the repo link containing the API similar to above and I would put them here!
 
