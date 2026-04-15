@@ -6,6 +6,13 @@
       "manifest_url": "https://ethos-foundry.pages.dev/traits/greetc/manifest.json",
       "verified": true,
       "tags": ["greet", "official","c"]
+    },
+    "greetcpp": {
+      "description": "Sample trait written in c++ for greet.",
+      "author": "AmanCode22",
+      "manifest_url": "https://ethos-foundry.pages.dev/traits/greetcpp/manifest.json",
+      "verified": true,
+      "tags": ["greet", "official","c","cpp"]
     }
   }
 }
