@@ -1,0 +1,56 @@
+{
+  "description": "Sample trait written in c++ for greet",
+  "name": "greetcpp",
+  "functions": {
+    "greet": {
+      "return": "void",
+      "args": [
+        "char *"
+      ]
+    }
+  },
+  "version": "1.0.0",
+  "submitter": "AmanCode22",
+  "repository": "https://github.com/AmanCode22/ethos-trait-greetcpp",
+  "license": "MIT",
+  "platforms": {
+    "linux-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-linux-x86_64.so",
+      "checksum": "sha256:d6ee6ae865a6c38981361b1323dd5e2c2ed3f05ff17fc7350b552d474a182f47"
+    },
+    "linux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-linux-arm64.so",
+      "checksum": "sha256:f680ed7860ffce1f485f0ad23db61402eb0b3328e6ad4fc88e98197dbfd7a492"
+    },
+    "macos-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-macos-arm64.dylib",
+      "checksum": "sha256:8544eab68bc64f9570536d0b43d1eefc7520c3d066f5405d028bbb8eb0124bd7"
+    },
+    "macos-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-macos-intel.dylib",
+      "checksum": "sha256:fa8305843b7b7b6d4e924414b896530f0ff80f1802bd9a25d635c4f21b8c5815"
+    },
+    "windows": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-windows-x86_64.dll",
+      "checksum": "sha256:4b35bf8d1f2145fb10ee4c1b7bea0c5d3d98fda1c514449fe7918d33385c36a5"
+    },
+    "windows-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-windows-arm64.dll",
+      "checksum": "sha256:ac0cbff7a6c8abfffd58a70116f191940ef9b77bf6284bacc49731cc1dec14d7"
+    },
+    "termux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-termux-arm64.so",
+      "checksum": "sha256:95f994768a2eb8f38aaa603f35561aedf13d7973a0b70266b5d3d2e41ffcfb57"
+    },
+    "termux-armv7": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetcpp/releases/download/v1.0.0/greetcpp-termux-armv7.so",
+      "checksum": "sha256:a55a826e0afa1b1d9a99ec1b64d8a437d51dd23c4b96ff239a00cc4871e1a1ee"
+    }
+  },
+  "tags": [
+    "greet",
+    "cpp",
+    "c++"
+  ],
+  "verified": false
+}
