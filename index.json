@@ -13,6 +13,13 @@
       "manifest_url": "https://ethos-foundry.pages.dev/traits/greetcpp/manifest.json",
       "verified": true,
       "tags": ["greet", "official","c","cpp"]
+    },
+      "greetr": {
+      "description": "Sample trait written in rust for greet.",
+      "author": "AmanCode22",
+      "manifest_url": "https://ethos-foundry.pages.dev/traits/greetr/manifest.json",
+      "verified": true,
+      "tags": ["greet", "official","c","cpp"]
     }
   }
 }
