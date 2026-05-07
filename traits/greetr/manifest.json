@@ -1,0 +1,56 @@
+{
+  "description": "Sample trait written in rust for greet",
+  "name": "greetr",
+  "functions": {
+    "greet": {
+      "return": "void",
+      "args": [
+        "char *"
+      ]
+    }
+  },
+  "version": "1.0.0",
+  "submitter": "AmanCode22",
+  "repository": "https://github.com/AmanCode22/ethos-trait-greetr",
+  "license": "MIT",
+  "platforms": {
+    "linux-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-linux-x86_64.so",
+      "checksum": "sha256:b6777a54e699d495ad52027d26766dd3e1b84b68b3721b61880b12de35ff10b6"
+    },
+    "linux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-linux-arm64.so",
+      "checksum": "sha256:25d536b79c04ce2a7b4689e1bd26ad84fe2a7657b2f9ecca50775bc06760b759"
+    },
+    "macos-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-macos-arm64.dylib",
+      "checksum": "sha256:93d929298045e20fb822ab396fc575a8bd7d6f24be737fb0241b2275c3d35484"
+    },
+    "macos-x86_64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-macos-intel.dylib",
+      "checksum": "sha256:a5af0db6c5d92953d001770c33547fd0c5322e5605b3fcce787e296737b0a856"
+    },
+    "windows": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-windows-x86_64.dll",
+      "checksum": "sha256:95bb3a0a9a81307726c98acd519f52d2075f1971447b34e4bb8eaef4f385bd99"
+    },
+    "windows-arm64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-windows-arm64.dll",
+      "checksum": "sha256:a61326534467e0de75334b0a4d6320d83507318d2dd822b3cccc721309472b15"
+    },
+    "termux-aarch64": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-termux-arm64.so",
+      "checksum": "sha256:11dfd333fc3a256bd1869194dc26accfdb0750d584909c437e33197fff5d5196"
+    },
+    "termux-armv7": {
+      "url": "https://github.com/AmanCode22/ethos-trait-greetr/releases/download/v1.0.0/greetr-termux-armv7.so",
+      "checksum": "sha256:77d0265b714535df9110c97a96fb4a60f77f01a569ef706527e64007263f5969"
+    }
+  },
+  "tags": [
+    "greet",
+    "r",
+    "rust"
+  ],
+  "verified": false
+}
