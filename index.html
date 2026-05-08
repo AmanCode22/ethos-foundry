@@ -428,6 +428,8 @@
 
     <script>
         let traits = {};
+        let searchTimeout = null;
+        let currentItems = [];
 
         function getBadge(t) {
             if (t.verified) {
@@ -465,6 +467,29 @@
             }, 1800);
         }
 
+        function buildHTML(items) {
+            if (items.length === 0) {
+                return '<div class="empty">no traits match</div>';
+            }
+
+            return items.map(([name, t]) => `
+                <article class="trait" data-name="${name}">
+                    <div class="trait-header">
+                        <h3 class="trait-name">${name}</h3>
+                        ${getBadge(t)}
+                    </div>
+                    <p class="trait-desc">${t.description || 'No description provided.'}</p>
+                    <div class="trait-meta">
+                        by ${t.author || 'unknown'}${t.version ? ` · v${t.version}` : ''}
+                    </div>
+                    <div class="install-stamp" onclick="copyInstall('${name}', this)">
+                        <span class="label">install</span>
+                        <span>forge foundry get ${name}</span>
+                    </div>
+                </article>
+            `).join('');
+        }
+
         function render(filter = '') {
             const el = document.getElementById('list');
             const q = filter.trim().toLowerCase();
@@ -482,27 +507,23 @@
 
             document.getElementById('count').textContent = items.length;
 
-            if (items.length === 0) {
-                el.innerHTML = `<div class="empty">no traits match "${filter}"</div>`;
-                return;
+            const newHTML = buildHTML(items);
+            const oldHTML = el.innerHTML;
+
+            if (newHTML !== oldHTML) {
+                el.innerHTML = newHTML;
             }
 
-            el.innerHTML = items.map(([name, t]) => `
-                <article class="trait">
-                    <div class="trait-header">
-                        <h3 class="trait-name">${name}</h3>
-                        ${getBadge(t)}
-                    </div>
-                    <p class="trait-desc">${t.description || 'No description provided.'}</p>
-                    <div class="trait-meta">
-                        by ${t.author || 'unknown'}${t.version ? ` · v${t.version}` : ''}
-                    </div>
-                    <div class="install-stamp" onclick="copyInstall('${name}', this)">
-                        <span class="label">install</span>
-                        <span>forge foundry get ${name}</span>
-                    </div>
-                </article>
-            `).join('');
+            currentItems = items;
+        }
+
+        function debouncedRender(filter) {
+            if (searchTimeout) {
+                clearTimeout(searchTimeout);
+            }
+            searchTimeout = setTimeout(() => {
+                render(filter);
+            }, 120);
         }
 
         fetch('index.json')
@@ -520,7 +541,9 @@
                     '<div class="empty">could not load index.json<br>make sure the file exists in the repo root</div>';
             });
 
-        document.getElementById('search').addEventListener('input', e => render(e.target.value));
+        document.getElementById('search').addEventListener('input', e => {
+            debouncedRender(e.target.value);
+        });
 
         document.addEventListener('keydown', e => {
             if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
