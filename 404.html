@@ -5,265 +5,262 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>404 — Ethos Foundry</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #080b10;
-            --surface: #0e1420;
-            --surface2: #141c2e;
-            --border: #1e2d47;
-            --border-bright: #2a4060;
-            --text: #dce8f5;
-            --text-dim: #5a7a9a;
-            --text-mid: #8aaac8;
-            --accent: #3d9fff;
-            --accent2: #00d4aa;
-            --code: #ff6b8a;
-            --mono: "JetBrains Mono", monospace;
-            --sans: "Syne", sans-serif;
+            --paper: #0d0d0f;
+            --ink: #e8e6e1;
+            --ink-light: #8a8580;
+            --ink-faint: #5a5550;
+            --warm: #c75d3a;
+            --warm-dim: #a3482e;
+            --cool: #6b8cae;
+            --rule: #1e1e22;
+            --rule-heavy: #2a2a30;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            background: #070708;
+        }
 
         body {
-            font-family: var(--sans);
-            background: var(--bg);
-            color: var(--text);
+            font-family: 'Space Grotesk', system-ui, sans-serif;
+            background: var(--paper);
+            color: var(--ink);
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            padding: 40px 24px;
         }
 
         body::before {
             content: '';
             position: fixed;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background:
-                radial-gradient(ellipse 50% 40% at 70% 20%, rgba(255,107,138,0.05) 0%, transparent 70%),
-                radial-gradient(ellipse 40% 30% at 20% 75%, rgba(61,159,255,0.04) 0%, transparent 60%);
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 680px;
+            height: 100vh;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
+            z-index: 0;
+            opacity: 0.7;
         }
 
-        .wrap {
-            text-align: center;
-            padding: 40px 24px;
+        .receipt {
+            max-width: 520px;
+            width: 100%;
             position: relative;
             z-index: 1;
-            animation: fadeUp 0.6s ease both;
+            text-align: center;
         }
 
-        .glitch-wrap {
-            position: relative;
+        .receipt::before {
+            content: '';
+            position: absolute;
+            top: -8px;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: radial-gradient(circle, transparent 30%, var(--rule-heavy) 35%, transparent 40%);
+            background-size: 12px 8px;
+            opacity: 0.3;
+        }
+
+        .stamp-void {
             display: inline-block;
-            margin-bottom: 8px;
+            border: 2px solid var(--warm);
+            color: var(--warm);
+            padding: 6px 18px;
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            transform: rotate(-2deg);
+            margin-bottom: 32px;
+            opacity: 0.9;
         }
 
         .code {
-            font-family: var(--mono);
-            font-size: clamp(5rem, 18vw, 9rem);
-            font-weight: 800;
-            color: transparent;
-            -webkit-text-stroke: 1px var(--border-bright);
-            letter-spacing: -0.04em;
-            position: relative;
+            font-family: 'Fragment Mono', monospace;
+            font-size: clamp(4rem, 15vw, 7rem);
+            font-weight: 400;
+            color: var(--ink-faint);
+            letter-spacing: -0.05em;
             line-height: 1;
-            display: block;
-        }
-
-        .code::before,
-        .code::after {
-            content: '404';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            font-family: var(--mono);
-            font-size: inherit;
-            font-weight: 800;
-            letter-spacing: -0.04em;
-            line-height: 1;
-        }
-
-        .code::before {
-            color: var(--accent);
-            opacity: 0.4;
-            animation: glitch1 4s infinite;
-        }
-
-        .code::after {
-            color: var(--code);
+            margin-bottom: 8px;
             opacity: 0.3;
-            animation: glitch2 4s infinite;
         }
 
-        .label {
-            font-family: var(--mono);
-            font-size: 11px;
-            color: var(--text-dim);
-            text-transform: uppercase;
-            letter-spacing: 0.14em;
-            margin-bottom: 32px;
+        .divider {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            margin-bottom: 28px;
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--ink-faint);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
         }
 
-        .label::before,
-        .label::after {
+        .divider::before,
+        .divider::after {
             content: '';
-            height: 1px;
-            width: 40px;
-            background: var(--border);
+            flex: 1;
+            border-bottom: 1px dotted var(--rule);
         }
 
         h1 {
-            font-size: 1.7rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            color: var(--text);
+            font-size: 1.4rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
             margin-bottom: 10px;
         }
 
         .desc {
-            color: var(--text-mid);
-            font-size: 0.88rem;
-            font-family: var(--mono);
-            max-width: 360px;
-            margin: 0 auto 36px;
-            line-height: 1.7;
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--ink-light);
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 36px;
         }
 
         .desc em {
-            color: var(--code);
+            color: var(--warm);
             font-style: normal;
         }
 
         .actions {
             display: flex;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .btn {
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.15s;
         }
 
         .btn-primary {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
-            background: linear-gradient(135deg, var(--accent), rgba(61,159,255,0.7));
-            color: #080b10;
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 700;
-            font-family: var(--mono);
-            letter-spacing: 0.03em;
-            transition: opacity 0.15s, transform 0.1s;
+            background: var(--warm);
+            color: var(--paper);
+            border: 1px solid var(--warm);
         }
 
-        .btn-primary:hover { opacity: 0.85; transform: translateY(-1px); }
-        .btn-primary:active { transform: scale(0.97); }
+        .btn-primary:hover {
+            background: var(--warm-dim);
+            border-color: var(--warm-dim);
+        }
 
         .btn-ghost {
-            display: inline-flex;
-            align-items: center;
-            gap: 7px;
             background: transparent;
-            color: var(--text-mid);
-            text-decoration: none;
-            padding: 10px 22px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: 600;
-            font-family: var(--mono);
-            letter-spacing: 0.03em;
-            border: 1px solid var(--border);
-            transition: border-color 0.15s, color 0.15s, transform 0.1s;
+            color: var(--ink-light);
+            border: 1px dashed var(--rule-heavy);
         }
 
         .btn-ghost:hover {
-            border-color: var(--border-bright);
-            color: var(--text);
-            transform: translateY(-1px);
+            border-style: solid;
+            border-color: var(--ink-faint);
+            color: var(--ink);
         }
 
-        .footer-note {
-            margin-top: 56px;
-            font-family: var(--mono);
-            font-size: 10px;
-            color: var(--text-dim);
-            opacity: 0.5;
+        .receipt-footer {
+            border-top: 2px dashed var(--rule);
+            padding-top: 24px;
         }
 
-        .footer-note a {
-            color: inherit;
+        .barcode {
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--ink-faint);
+            letter-spacing: 0.15em;
+            margin-bottom: 16px;
+            opacity: 0.3;
+            word-break: break-all;
+        }
+
+        .meta {
+            font-family: 'Fragment Mono', monospace;
+            font-size: 0.65rem;
+            color: var(--ink-faint);
+            font-style: italic;
+        }
+
+        .meta a {
+            color: var(--ink-light);
             text-decoration: none;
+            transition: color 0.2s;
         }
 
-        .footer-note a:hover { opacity: 1; color: var(--text-mid); }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes glitch1 {
-            0%, 90%, 100% { clip-path: none; transform: none; }
-            92% { clip-path: inset(30% 0 40% 0); transform: translateX(-4px); }
-            94% { clip-path: inset(60% 0 10% 0); transform: translateX(4px); }
-            96% { clip-path: inset(10% 0 70% 0); transform: translateX(-2px); }
-        }
-
-        @keyframes glitch2 {
-            0%, 88%, 100% { clip-path: none; transform: none; }
-            90% { clip-path: inset(50% 0 20% 0); transform: translateX(5px); }
-            93% { clip-path: inset(20% 0 60% 0); transform: translateX(-3px); }
-            95% { clip-path: inset(70% 0 5% 0); transform: translateX(2px); }
+        .meta a:hover {
+            color: var(--warm);
         }
 
         @media (max-width: 480px) {
-            h1 { font-size: 1.4rem; }
-            .actions { flex-direction: column; align-items: center; }
-            .btn-primary, .btn-ghost { width: 100%; max-width: 260px; justify-content: center; }
+            .actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .btn {
+                text-align: center;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
-            * { animation: none !important; transition: none !important; }
+            * {
+                transition: none !important;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <div class="glitch-wrap">
-            <span class="code">404</span>
-        </div>
+    <div class="receipt">
+        <div class="stamp-void">void</div>
 
-        <p class="label">trait not found</p>
+        <div class="code">404</div>
 
-        <h1>Nothing here you may have lost your way!</h1>
+        <div class="divider">trait not found</div>
+
+        <h1>Nothing here</h1>
         <p class="desc">
-            The path <em id="path-display"></em> doesn't exist in the registry or was moved.
+            The path <em id="path-display">this page</em> doesn't exist in the registry or was moved.
         </p>
 
         <div class="actions">
-            <a href="/" class="btn-primary">← Go to cloudfare hosted registry</a>
-            <a href="/" class="btn-primary">← Go to github hosted registry</a>
-            <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener" class="btn-ghost">view on github</a>
+            <a href="https://foundry-ethos.pages.dev/" class="btn btn-primary">cloudflare registry</a>
+            <a href="https://amancode22.github.io/ethos-foundry/" class="btn btn-primary">github registry</a>
+            <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener" class="btn btn-ghost">view source</a>
         </div>
 
-        <p class="footer-note">
-            ethos foundry · built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman</a>
-        </p>
+        <div class="receipt-footer">
+            <div class="barcode">|| | ||| | | |||| | || | ||| | | |||</div>
+            <div class="meta">
+                ethos foundry · built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman adlakha</a>
+            </div>
+        </div>
     </div>
 
     <script>
         const p = window.location.pathname;
         if (p && p !== '/') {
             document.getElementById('path-display').textContent = p;
-        } else {
-            document.getElementById('path-display').textContent = 'this page';
         }
     </script>
 </body>
