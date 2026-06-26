@@ -1,556 +1,529 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ethos Foundry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --paper: #0d0d0f;
-            --ink: #e8e6e1;
-            --ink-light: #8a8580;
-            --ink-faint: #5a5550;
-            --warm: #c75d3a;
-            --warm-dim: #a3482e;
-            --cool: #6b8cae;
-            --cool-dim: #4a6f8c;
-            --rule: #1e1e22;
-            --rule-heavy: #2a2a30;
-            --highlight: rgba(199, 93, 58, 0.1);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ethos Foundry — Hard traits registry</title>
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --bg-tint: #eff6ff;
+  --bg-card: #ffffff;
+  --bg-code: #f8fafc;
+  --fg: #0f172a;
+  --fg-dim: #475569;
+  --fg-muted: #94a3b8;
+  --primary: #2563eb;
+  --primary-dk: #1d4ed8;
+  --primary-soft: #dbeafe;
+  --primary-tint: #eff6ff;
+  --accent: #06b6d4;
+  --accent-soft: #cffafe;
+  --success: #16a34a;
+  --success-soft: #dcfce7;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --purple: #7c3aed;
+  --purple-soft: #ede9fe;
+  --border: #e2e8f0;
+  --border-soft: #f1f5f9;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+  --shadow: 0 4px 14px rgba(15,23,42,.08);
+  --shadow-lg: 0 18px 40px rgba(15,23,42,.12);
+  --shadow-blue: 0 8px 24px rgba(37,99,235,.18);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 18px;
+  --maxw: 1140px;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+.mono, code, pre, kbd {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-        html {
-            background: #070708;
-        }
+.topbar {
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-tint) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex; align-items: center; gap: 18px;
+  position: sticky; top: 0; z-index: 50;
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+.topbar .brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; font-size: 19px; letter-spacing: -.4px;
+  color: var(--fg);
+}
+.topbar .brand:hover { text-decoration: none; }
+.topbar .brand .logo-img {
+  width: 34px; height: 34px; border-radius: 8px;
+  object-fit: contain; display: block;
+  box-shadow: 0 2px 6px rgba(37,99,235,.20);
+  background: #fff;
+}
+.topbar .brand .wordmark {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar .tagline {
+  color: var(--fg-dim); font-size: 13.5px; font-weight: 500;
+  padding-left: 18px; border-left: 1px solid var(--border);
+}
+.topbar .spacer { flex: 1; }
+.topbar .top-links { display: flex; gap: 8px; align-items: center; }
+.topbar .top-links a {
+  color: var(--fg-dim); font-size: 13.5px; font-weight: 500;
+  padding: 7px 12px; border-radius: 8px;
+}
+.topbar .top-links a:hover {
+  color: var(--primary); background: var(--primary-tint); text-decoration: none;
+}
+.topbar .top-links a.cta {
+  background: var(--primary); color: #fff;
+  box-shadow: var(--shadow-blue);
+}
+.topbar .top-links a.cta:hover { background: var(--primary-dk); color: #fff; }
 
-        body {
-            font-family: 'Space Grotesk', system-ui, sans-serif;
-            background: var(--paper);
-            color: var(--ink);
-            line-height: 1.5;
-            min-height: 100vh;
-            max-width: 680px;
-            margin: 0 auto;
-            padding: 48px 28px 80px;
-            border-left: 1px solid var(--rule);
-            border-right: 1px solid var(--rule);
-            position: relative;
-            box-shadow: 0 0 80px rgba(0,0,0,0.3);
-        }
+.page { padding: 36px 24px 64px; }
+.page-inner { max-width: var(--maxw); margin: 0 auto; }
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 680px;
-            height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.7;
-        }
+.hero {
+  background: linear-gradient(135deg, var(--primary-tint) 0%, #fff 70%);
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 40px 36px; margin-bottom: 28px; position: relative; overflow: hidden;
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    radial-gradient(circle at 12% 18%, rgba(37,99,235,.10) 0, transparent 38%),
+    radial-gradient(circle at 88% 8%, rgba(6,182,212,.10) 0, transparent 35%);
+  pointer-events: none;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero h1 {
+  font-size: 38px; line-height: 1.1; letter-spacing: -1px;
+  margin: 0 0 12px; font-weight: 800;
+}
+.hero h1 .grad {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.hero .lede {
+  font-size: 16px; color: var(--fg-dim); margin: 0 0 22; max-width: 620px;
+}
+.hero .lede strong { color: var(--fg); }
 
-        body::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: radial-gradient(circle, transparent 30%, var(--rule-heavy) 35%, transparent 40%);
-            background-size: 12px 8px;
-            opacity: 0.3;
-        }
+h2.block {
+  font-size: 22px; margin: 36px 0 14px; font-weight: 700;
+  color: var(--fg); letter-spacing: -.3px;
+  padding-bottom: 6px; border-bottom: 2px solid var(--primary-soft);
+}
 
-        .content {
-            position: relative;
-            z-index: 1;
-        }
+.search-box {
+  position: relative; margin-bottom: 24px;
+}
+.search-box input {
+  width: 100%;
+  padding: 14px 16px 14px 44px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  font-family: inherit; font-size: 15px;
+  color: var(--fg);
+  outline: none;
+  transition: border-color .15s, box-shadow .15s;
+}
+.search-box input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px var(--primary-soft);
+}
+.search-box input::placeholder {
+  color: var(--fg-muted);
+}
+.search-icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--fg-muted); font-size: 18px;
+  pointer-events: none;
+}
 
-        header {
-            margin-bottom: 40px;
-            padding-bottom: 24px;
-            border-bottom: 2px dashed var(--rule);
-        }
+.receipt-line {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px; color: var(--fg-dim);
+}
+.receipt-line .dots {
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+  margin: 0 10px;
+  position: relative; top: -3px;
+}
+.receipt-line .count {
+  color: var(--primary); font-weight: 700;
+}
 
-        .stamp {
-            display: inline-block;
-            border: 2px solid var(--warm);
-            color: var(--warm);
-            padding: 6px 14px;
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            transform: rotate(-1deg);
-            margin-bottom: 20px;
-            opacity: 0.85;
-        }
+.trait {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 18px 20px;
+  margin-bottom: 12px;
+  transition: transform .15s, box-shadow .15s, border-color .15s;
+}
+.trait:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+  border-color: var(--primary);
+}
+.trait-header {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 12px; margin-bottom: 6px;
+}
+.trait-name {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 16px; font-weight: 600;
+  color: var(--fg); letter-spacing: -.01em;
+  margin: 0;
+}
+.trait-name::before {
+  content: '>';
+  color: var(--primary);
+  margin-right: 8px;
+  font-weight: 400;
+}
+.trait-badge {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: .3px;
+  padding: 3px 9px; border-radius: 4px;
+  flex-shrink: 0;
+}
+.trait-badge.verified {
+  background: var(--success-soft);
+  color: var(--success);
+  border: 1px solid #bbf7d0;
+}
+.trait-badge.unverified {
+  background: var(--bg-soft);
+  color: var(--fg-muted);
+  border: 1px solid var(--border);
+}
+.trait-desc {
+  color: var(--fg-dim);
+  font-size: 14px; line-height: 1.55;
+  margin: 6px 0 10px;
+  padding-left: 22px;
+}
+.trait-meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px; color: var(--fg-muted);
+  padding-left: 22px;
+  margin-bottom: 12px;
+}
+.install-stamp {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: var(--primary-tint);
+  border: 1px dashed var(--primary);
+  padding: 8px 12px;
+  margin-left: 22px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 13px;
+  color: var(--primary-dk);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all .15s;
+  user-select: all;
+}
+.install-stamp:hover {
+  background: var(--primary-soft);
+  border-style: solid;
+}
+.install-stamp.copied {
+  background: var(--success-soft);
+  border-color: var(--success);
+  color: var(--success);
+}
+.install-stamp .label {
+  font-size: 10px; text-transform: uppercase; letter-spacing: .1em;
+  opacity: .7;
+}
 
-        h1 {
-            font-size: 1.9rem;
-            font-weight: 700;
-            letter-spacing: -0.03em;
-            line-height: 1.1;
-            margin-bottom: 8px;
-        }
+.empty {
+  text-align: center; padding: 48px 20px;
+  color: var(--fg-muted);
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px; font-style: italic;
+  background: var(--bg-soft);
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+}
 
-        .tagline {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--ink-light);
-            font-style: italic;
-            line-height: 1.6;
-        }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 18px 20px;
+  margin: 16px 0; box-shadow: var(--shadow-sm);
+}
+.card.info {
+  border-left: 4px solid var(--primary);
+  background: linear-gradient(90deg, var(--primary-tint), #fff 60%);
+}
 
-        .search-box {
-            position: relative;
-            margin-bottom: 28px;
-        }
+.btn {
+  appearance: none; cursor: pointer; font-family: inherit;
+  background: #fff; color: var(--fg);
+  border: 1px solid var(--border); padding: 9px 16px;
+  border-radius: 8px; font-size: 14px; font-weight: 600;
+  transition: all .15s; display: inline-flex; align-items: center; gap: 6px;
+  text-decoration: none;
+}
+.btn:hover { background: var(--primary-tint); border-color: var(--primary); color: var(--primary); text-decoration: none; }
+.btn.primary {
+  background: var(--primary); color: #fff; border-color: var(--primary);
+  box-shadow: var(--shadow-blue);
+}
+.btn.primary:hover { background: var(--primary-dk); color: #fff; border-color: var(--primary-dk); }
 
-        .search-box input {
-            width: 100%;
-            padding: 14px 16px 14px 40px;
-            background: transparent;
-            border: 1.5px solid var(--rule);
-            border-radius: 0;
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 0.95rem;
-            color: var(--ink);
-            outline: none;
-            transition: border-color 0.2s;
-        }
+footer.site {
+  background: var(--bg-soft); border-top: 1px solid var(--border);
+  padding: 28px 24px 24px; margin-top: 40px;
+}
+.footer-inner {
+  max-width: var(--maxw); margin: 0 auto;
+  text-align: center;
+}
+.footer-links {
+  display: flex; justify-content: center; gap: 20px;
+  flex-wrap: wrap; margin-bottom: 12px;
+}
+footer.site a {
+  color: var(--fg-dim); font-size: 13px; font-weight: 500;
+  text-transform: uppercase; letter-spacing: .05em;
+  text-decoration: none;
+}
+footer.site a:hover { color: var(--primary); }
+.attribution {
+  font-size: 12px; color: var(--fg-muted);
+  font-style: italic;
+}
+.attribution a {
+  color: var(--fg-dim); text-decoration: none;
+}
+.attribution a:hover { color: var(--primary); }
 
-        .search-box input:focus {
-            border-color: var(--ink-light);
-        }
-
-        .search-box input::placeholder {
-            color: var(--ink-faint);
-            font-style: italic;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 14px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--ink-faint);
-            font-size: 13px;
-        }
-
-        .receipt-line {
-            display: flex;
-            justify-content: space-between;
-            align-items: baseline;
-            margin-bottom: 20px;
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.75rem;
-            color: var(--ink-light);
-        }
-
-        .receipt-line .dots {
-            flex: 1;
-            border-bottom: 1px dotted var(--rule);
-            margin: 0 8px;
-            position: relative;
-            top: -3px;
-        }
-
-        .trait {
-            padding: 18px 0;
-            border-bottom: 1px solid var(--rule);
-            position: relative;
-        }
-
-        .trait:first-child {
-            border-top: 1px solid var(--rule);
-        }
-
-        .trait-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 12px;
-            margin-bottom: 6px;
-        }
-
-        .trait-name {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.95rem;
-            font-weight: 500;
-            color: var(--ink);
-            letter-spacing: -0.01em;
-        }
-
-        .trait-name::before {
-            content: '>';
-            color: var(--warm);
-            margin-right: 8px;
-            font-weight: 400;
-        }
-
-        .trait-badge {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 2px 8px;
-            border: 1px solid var(--rule-heavy);
-            color: var(--ink-light);
-            flex-shrink: 0;
-            transform: rotate(0.5deg);
-        }
-
-        .trait-badge.verified {
-            border-color: var(--cool-dim);
-            color: var(--cool);
-            background: rgba(107, 140, 174, 0.06);
-        }
-
-        .trait-desc {
-            color: var(--ink-light);
-            font-size: 0.85rem;
-            line-height: 1.55;
-            margin-bottom: 10px;
-            padding-left: 18px;
-        }
-
-        .trait-meta {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--ink-faint);
-            padding-left: 18px;
-            margin-bottom: 12px;
-        }
-
-        .install-stamp {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: var(--highlight);
-            border: 1px dashed var(--warm-dim);
-            padding: 8px 12px;
-            margin-left: 18px;
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.78rem;
-            color: var(--warm-dim);
-            cursor: pointer;
-            transition: all 0.15s;
-            user-select: all;
-        }
-
-        .install-stamp:hover {
-            background: rgba(199, 93, 58, 0.15);
-            border-style: solid;
-        }
-
-        .install-stamp.copied {
-            background: rgba(107, 140, 174, 0.1);
-            border-color: var(--cool);
-            color: var(--cool);
-        }
-
-        .install-stamp .label {
-            font-size: 0.6rem;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            opacity: 0.7;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 48px 20px;
-            color: var(--ink-faint);
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-
-        footer {
-            margin-top: 48px;
-            padding-top: 24px;
-            border-top: 2px dashed var(--rule);
-            text-align: center;
-        }
-
-        .barcode {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.9rem;
-            color: var(--ink-faint);
-            letter-spacing: 0.15em;
-            margin-bottom: 16px;
-            opacity: 0.4;
-            word-break: break-all;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-            margin-bottom: 16px;
-        }
-
-        footer a {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--ink-light);
-            text-decoration: none;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            transition: color 0.2s;
-        }
-
-        footer a:hover {
-            color: var(--warm);
-        }
-
-        .attribution {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--ink-faint);
-            font-style: italic;
-        }
-
-        .attribution a {
-            color: var(--ink-light);
-            text-decoration: none;
-            transition: color 0.2s;
-            cursor: pointer;
-        }
-
-        .attribution a:hover {
-            color: var(--warm);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 48px;
-            color: var(--ink-faint);
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.8rem;
-            font-style: italic;
-        }
-
-        ::selection {
-            background: var(--warm);
-            color: var(--paper);
-        }
-
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: transparent;
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--rule);
-        }
-
-        @media (max-width: 600px) {
-            body {
-                border: none;
-                padding: 32px 20px 60px;
-            }
-
-            h1 {
-                font-size: 1.6rem;
-            }
-
-            .trait-header {
-                flex-direction: column;
-                gap: 6px;
-            }
-
-            .install-stamp {
-                margin-left: 0;
-                display: flex;
-                flex-wrap: wrap;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-            }
-        }
-    </style>
+@media (max-width: 700px) {
+  .topbar { padding: 12px 16px; gap: 10px; }
+  .topbar .tagline { display: none; }
+  .hero { padding: 28px 20px; }
+  .hero h1 { font-size: 28px; }
+  .trait-header { flex-direction: column; gap: 6px; }
+  .install-stamp { margin-left: 0; display: flex; flex-wrap: wrap; }
+}
+</style>
 </head>
 <body>
-    <div class="content">
-        <header>
-            <div class="stamp">registry</div>
-            <h1>Ethos Foundry</h1>
-            <p class="tagline">Hard traits registry for Ethos — native extensions, pre-built for your platform.</p>
-        </header>
 
-        <div class="search-box">
-            <span class="search-icon">/</span>
-            <input type="text" id="search" placeholder="search traits..." autocomplete="off">
-        </div>
+<header class="topbar">
+  <a href="https://foundry-ethos.pages.dev/" class="brand">
+    <img src="https://raw.githubusercontent.com/AmanCode22/ethos-lang/main/ethos_logo.png" alt="Ethos" class="logo-img" />
+    <span class="wordmark">Ethos Foundry</span>
+  </a>
+  <span class="tagline">Hard traits registry &mdash; native extensions, pre-built for your platform</span>
+  <span class="spacer"></span>
+  <div class="top-links">
+    <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md" target="_blank" rel="noopener">Docs</a>
+    <a href="https://github.com/AmanCode22/forge" target="_blank" rel="noopener">Forge</a>
+    <a href="https://github.com/AmanCode22" target="_blank" rel="noopener" class="cta">GitHub &nearr;</a>
+  </div>
+</header>
 
-        <div class="receipt-line">
-            <span id="count">—</span>
-            <span class="dots"></span>
-            <span>indexed</span>
-        </div>
+<main class="page">
+  <div class="page-inner">
 
-        <div id="list">
-            <div class="loading">Fetching index...</div>
-        </div>
-
-        <footer>
-            <div class="barcode">|| | ||| | | |||| | || | |||</div>
-            <div class="footer-links">
-                <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">GitHub</a>
-                <a href="https://foundry-ethos.pages.dev/" target="_blank" rel="noopener">Registry</a>
-                <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md" target="_blank" rel="noopener">Docs</a>
-                <a href="https://github.com/AmanCode22/forge" target="_blank" rel="noopener">Forge</a>
-            </div>
-            <div class="attribution">
-                built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman adlakha</a> · class 9, india
-            </div>
-        </footer>
+    <div class="hero">
+      <h1><span class="grad">Ethos Foundry</span></h1>
+      <p class="lede">
+        The Hard Trait registry for Ethos. Every trait is verified and built for all 8 platforms. Search, install with <code>forge foundry get &lt;name&gt;</code>, and use in your Ethos scripts.
+      </p>
     </div>
 
-    <script>
-        let traits = {};
-        let searchTimeout = null;
-        let currentItems = [];
+    <div class="search-box">
+      <span class="search-icon">&rsaquo;</span>
+      <input type="text" id="search" placeholder="search traits..." autocomplete="off" />
+    </div>
 
-        function getBadge(t) {
-            if (t.verified) {
-                return '<span class="trait-badge verified">verified</span>';
-            }
-            if ((t.tags || []).includes('official')) {
-                return '<span class="trait-badge">official</span>';
-            }
-            return '';
-        }
+    <div class="receipt-line">
+      <span><span class="count" id="count">0</span> traits</span>
+      <span class="dots"></span>
+      <span>indexed</span>
+    </div>
 
-        function copyInstall(name, el) {
-            const cmd = `forge foundry get ${name}`;
-            
-            if (navigator.clipboard) {
-                navigator.clipboard.writeText(cmd).then(() => markCopied(el));
-            } else {
-                const ta = document.createElement('textarea');
-                ta.value = cmd;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                markCopied(el);
-            }
-        }
+    <div id="list">
+      <div class="empty">loading traits&hellip;</div>
+    </div>
 
-        function markCopied(el) {
-            el.classList.add('copied');
-            const original = el.innerHTML;
-            el.innerHTML = '<span class="label">ok</span> copied to clipboard';
-            setTimeout(() => {
-                el.classList.remove('copied');
-                el.innerHTML = original;
-            }, 1800);
-        }
+    <div class="card info">
+      <p style="margin:0">Every trait on Foundry must support <strong>all 8 platforms</strong> (Linux x86_64/ARM64, macOS Intel/Apple Silicon, Windows x86_64/arm64, Termux ARM64/ARMv7). If you can't support a platform, open an issue first &mdash; otherwise the PR is rejected. <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">Submit a trait &nearr;</a></p>
+    </div>
 
-        function buildHTML(items) {
-            if (items.length === 0) {
-                return '<div class="empty">no traits match</div>';
-            }
+  </div>
+</main>
 
-            return items.map(([name, t]) => `
-                <article class="trait" data-name="${name}">
-                    <div class="trait-header">
-                        <h3 class="trait-name">${name}</h3>
-                        ${getBadge(t)}
-                    </div>
-                    <p class="trait-desc">${t.description || 'No description provided.'}</p>
-                    <div class="trait-meta">
-                        by ${t.author || 'unknown'}${t.version ? ` · v${t.version}` : ''}
-                    </div>
-                    <div class="install-stamp" onclick="copyInstall('${name}', this)">
-                        <span class="label">install</span>
-                        <span>forge foundry get ${name}</span>
-                    </div>
-                </article>
-            `).join('');
-        }
+<footer class="site">
+  <div class="footer-inner">
+    <div class="footer-links">
+      <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://foundry-ethos.pages.dev/" target="_blank" rel="noopener">Cloudflare Registry</a>
+      <a href="https://amancode22.github.io/ethos-foundry/" target="_blank" rel="noopener">GitHub Pages Mirror</a>
+      <a href="https://github.com/AmanCode22/ethos-lang/blob/main/DOCS.md" target="_blank" rel="noopener">Docs</a>
+      <a href="https://github.com/AmanCode22/forge" target="_blank" rel="noopener">Forge</a>
+    </div>
+    <div class="attribution">
+      built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman adlakha</a> &middot; class 9, india
+    </div>
+  </div>
+</footer>
 
-        function render(filter = '') {
-            const el = document.getElementById('list');
-            const q = filter.trim().toLowerCase();
+<script>
+  const FOUNDRY_INDEX_URL = 'https://foundry-ethos.pages.dev/index.json';
+  const FALLBACK_INDEX_URL = 'https://amancode22.github.io/ethos-foundry/index.json';
 
-            const items = Object.entries(traits).filter(([name, t]) => {
-                if (!q) return true;
-                const hay = [
-                    name,
-                    t.description || '',
-                    (t.tags || []).join(' '),
-                    t.author || ''
-                ].join(' ').toLowerCase();
-                return hay.includes(q);
-            });
+  let traits = {};
+  let searchTimeout = null;
 
-            document.getElementById('count').textContent = items.length;
+  const searchInput = document.getElementById('search');
+  const list = document.getElementById('list');
+  const count = document.getElementById('count');
 
-            const newHTML = buildHTML(items);
-            const oldHTML = el.innerHTML;
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
 
-            if (newHTML !== oldHTML) {
-                el.innerHTML = newHTML;
-            }
+  function getBadge(t) {
+    if (t.verified) return '<span class="trait-badge verified">verified</span>';
+    if ((t.tags || []).includes('official')) return '<span class="trait-badge unverified">official</span>';
+    return '<span class="trait-badge unverified">unverified</span>';
+  }
 
-            currentItems = items;
-        }
+  function buildHTML(items) {
+    if (items.length === 0) {
+      return '<div class="empty">no traits match</div>';
+    }
+    return items.map(([name, t]) => {
+      const desc = t.description || 'No description provided.';
+      const author = t.author || 'unknown';
+      const version = t.version ? ' &middot; v' + escapeHtml(t.version) : '';
+      return '<article class="trait" data-name="' + escapeHtml(name) + '">' +
+        '<div class="trait-header">' +
+        '<h3 class="trait-name">' + escapeHtml(name) + '</h3>' +
+        getBadge(t) +
+        '</div>' +
+        '<p class="trait-desc">' + escapeHtml(desc) + '</p>' +
+        '<div class="trait-meta">by ' + escapeHtml(author) + version + '</div>' +
+        '<div class="install-stamp" onclick="copyInstall(\'' + escapeHtml(name) + '\', this)">' +
+        '<span class="label">install</span>' +
+        '<span>forge foundry get ' + escapeHtml(name) + '</span>' +
+        '</div>' +
+        '</article>';
+    }).join('');
+  }
 
-        function debouncedRender(filter) {
-            if (searchTimeout) {
-                clearTimeout(searchTimeout);
-            }
-            searchTimeout = setTimeout(() => {
-                render(filter);
-            }, 120);
-        }
+  function render(filter) {
+    filter = filter || '';
+    const q = filter.trim().toLowerCase();
+    const items = Object.entries(traits).filter(([name, t]) => {
+      if (!q) return true;
+      const hay = [name, t.description || '', (t.tags || []).join(' '), t.author || ''].join(' ').toLowerCase();
+      return hay.includes(q);
+    });
+    count.textContent = items.length;
+    const newHTML = buildHTML(items);
+    if (list.innerHTML !== newHTML) {
+      list.innerHTML = newHTML;
+    }
+  }
 
-        fetch('index.json')
-            .then(r => {
-                if (!r.ok) throw new Error(`HTTP ${r.status}`);
-                return r.json();
-            })
-            .then(data => {
-                traits = (data && data.traits) || {};
-                render();
-            })
-            .catch(err => {
-                console.error('Failed to load index.json:', err);
-                document.getElementById('list').innerHTML = 
-                    '<div class="empty">could not load index.json<br>make sure the file exists in the repo root</div>';
-            });
+  function debouncedRender(filter) {
+    if (searchTimeout) clearTimeout(searchTimeout);
+    searchTimeout = setTimeout(() => render(filter), 120);
+  }
 
-        document.getElementById('search').addEventListener('input', e => {
-            debouncedRender(e.target.value);
-        });
+  function copyInstall(name, el) {
+    const cmd = 'forge foundry get ' + name;
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(cmd).then(() => markCopied(el));
+    } else {
+      const ta = document.createElement('textarea');
+      ta.value = cmd;
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch (e) {}
+      document.body.removeChild(ta);
+      markCopied(el);
+    }
+  }
 
-        document.addEventListener('keydown', e => {
-            if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-                e.preventDefault();
-                document.getElementById('search').focus();
-            }
-        });
-    </script>
+  function markCopied(el) {
+    el.classList.add('copied');
+    const original = el.innerHTML;
+    el.innerHTML = '<span class="label">ok</span> copied to clipboard';
+    setTimeout(() => {
+      el.classList.remove('copied');
+      el.innerHTML = original;
+    }, 1800);
+  }
+
+  function fetchIndex(url) {
+    return fetch(url).then(r => {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    });
+  }
+
+  fetchIndex(FOUNDRY_INDEX_URL)
+    .catch(() => fetchIndex(FALLBACK_INDEX_URL))
+    .then(data => {
+      traits = (data && data.traits) || {};
+      render();
+    })
+    .catch(err => {
+      console.error('Failed to load index.json:', err);
+      list.innerHTML = '<div class="empty">could not load the registry. check your connection and try again.</div>';
+      count.textContent = '0';
+    });
+
+  searchInput.addEventListener('input', e => debouncedRender(e.target.value));
+  document.addEventListener('keydown', e => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      searchInput.focus();
+    }
+    if (e.key === '/' && document.activeElement !== searchInput) {
+      e.preventDefault();
+      searchInput.focus();
+    }
+  });
+</script>
+
 </body>
 </html>
