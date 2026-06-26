@@ -1,267 +1,319 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 — Ethos Foundry</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fragment+Mono:ital@0;1&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --paper: #0d0d0f;
-            --ink: #e8e6e1;
-            --ink-light: #8a8580;
-            --ink-faint: #5a5550;
-            --warm: #c75d3a;
-            --warm-dim: #a3482e;
-            --cool: #6b8cae;
-            --rule: #1e1e22;
-            --rule-heavy: #2a2a30;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>404 — Ethos Foundry</title>
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f8fafc;
+  --bg-tint: #eff6ff;
+  --fg: #0f172a;
+  --fg-dim: #475569;
+  --fg-muted: #94a3b8;
+  --primary: #2563eb;
+  --primary-dk: #1d4ed8;
+  --primary-soft: #dbeafe;
+  --primary-tint: #eff6ff;
+  --accent: #06b6d4;
+  --danger: #dc2626;
+  --danger-soft: #fee2e2;
+  --warning: #d97706;
+  --warning-soft: #fef3c7;
+  --border: #e2e8f0;
+  --shadow-sm: 0 1px 2px rgba(15,23,42,.05);
+  --shadow: 0 4px 14px rgba(15,23,42,.08);
+  --shadow-lg: 0 18px 40px rgba(15,23,42,.12);
+  --shadow-blue: 0 8px 24px rgba(37,99,235,.18);
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-lg: 18px;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  line-height: 1.65;
+  font-size: 15px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.mono, code, pre, kbd {
+  font-family: "JetBrains Mono", "Fira Code", "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
 
-        html {
-            background: #070708;
-        }
+.topbar {
+  background: linear-gradient(135deg, #ffffff 0%, var(--primary-tint) 100%);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 28px;
+  display: flex; align-items: center; gap: 18px;
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+}
+.topbar .brand {
+  display: flex; align-items: center; gap: 12px;
+  font-weight: 800; font-size: 19px; letter-spacing: -.4px;
+  color: var(--fg);
+}
+.topbar .brand:hover { text-decoration: none; }
+.topbar .brand .logo-img {
+  width: 34px; height: 34px; border-radius: 8px;
+  object-fit: contain; display: block;
+  box-shadow: 0 2px 6px rgba(37,99,235,.20);
+  background: #fff;
+}
+.topbar .brand .wordmark {
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.topbar .tagline {
+  color: var(--fg-dim); font-size: 13.5px; font-weight: 500;
+  padding-left: 18px; border-left: 1px solid var(--border);
+}
+.topbar .spacer { flex: 1; }
+.topbar .top-links { display: flex; gap: 8px; align-items: center; }
+.topbar .top-links a {
+  color: var(--fg-dim); font-size: 13.5px; font-weight: 500;
+  padding: 7px 12px; border-radius: 8px;
+}
+.topbar .top-links a:hover {
+  color: var(--primary); background: var(--primary-tint); text-decoration: none;
+}
+.topbar .top-links a.cta {
+  background: var(--primary); color: #fff;
+  box-shadow: var(--shadow-blue);
+}
+.topbar .top-links a.cta:hover { background: var(--primary-dk); color: #fff; }
 
-        body {
-            font-family: 'Space Grotesk', system-ui, sans-serif;
-            background: var(--paper);
-            color: var(--ink);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 24px;
-        }
+.main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+  background: linear-gradient(180deg, var(--primary-tint) 0%, #fff 100%);
+}
 
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 680px;
-            height: 100vh;
-            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
-            pointer-events: none;
-            z-index: 0;
-            opacity: 0.7;
-        }
+.card-404 {
+  max-width: 540px;
+  width: 100%;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 48px 40px;
+  text-align: center;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+.card-404::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+}
 
-        .receipt {
-            max-width: 520px;
-            width: 100%;
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
+.stamp-void {
+  display: inline-block;
+  border: 2px solid var(--danger);
+  color: var(--danger);
+  background: var(--danger-soft);
+  padding: 6px 18px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  transform: rotate(-2deg);
+  margin-bottom: 28px;
+  border-radius: 4px;
+}
 
-        .receipt::before {
-            content: '';
-            position: absolute;
-            top: -8px;
-            left: 0;
-            right: 0;
-            height: 8px;
-            background: radial-gradient(circle, transparent 30%, var(--rule-heavy) 35%, transparent 40%);
-            background-size: 12px 8px;
-            opacity: 0.3;
-        }
+.code-404 {
+  font-family: "JetBrains Mono", monospace;
+  font-size: clamp(4rem, 15vw, 7rem);
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--primary), var(--accent));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
 
-        .stamp-void {
-            display: inline-block;
-            border: 2px solid var(--warm);
-            color: var(--warm);
-            padding: 6px 18px;
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            transform: rotate(-2deg);
-            margin-bottom: 32px;
-            opacity: 0.9;
-        }
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+.divider::before,
+.divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px dotted var(--border);
+}
 
-        .code {
-            font-family: 'Fragment Mono', monospace;
-            font-size: clamp(4rem, 15vw, 7rem);
-            font-weight: 400;
-            color: var(--ink-faint);
-            letter-spacing: -0.05em;
-            line-height: 1;
-            margin-bottom: 8px;
-            opacity: 0.3;
-        }
+h1 {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 0 0 10px;
+  color: var(--fg);
+}
 
-        .divider {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 28px;
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.7rem;
-            color: var(--ink-faint);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-        }
+.desc {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 14px;
+  color: var(--fg-dim);
+  line-height: 1.6;
+  margin: 0 0 32px;
+}
+.desc em {
+  color: var(--primary);
+  font-style: normal;
+  font-weight: 600;
+}
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px dotted var(--rule);
-        }
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 32px;
+}
 
-        h1 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 10px;
-        }
+.btn {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 10px 20px;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+  border: 1px solid var(--primary);
+  box-shadow: var(--shadow-blue);
+}
+.btn-primary:hover {
+  background: var(--primary-dk);
+  border-color: var(--primary-dk);
+  color: #fff;
+  text-decoration: none;
+}
+.btn-ghost {
+  background: #fff;
+  color: var(--fg-dim);
+  border: 1px solid var(--border);
+}
+.btn-ghost:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  text-decoration: none;
+  background: var(--primary-tint);
+}
 
-        .desc {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.8rem;
-            color: var(--ink-light);
-            font-style: italic;
-            line-height: 1.6;
-            margin-bottom: 36px;
-        }
+.receipt-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 20px;
+}
+.attribution {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  color: var(--fg-muted);
+  font-style: italic;
+}
+.attribution a {
+  color: var(--fg-dim);
+  text-decoration: none;
+}
+.attribution a:hover {
+  color: var(--primary);
+}
 
-        .desc em {
-            color: var(--warm);
-            font-style: normal;
-        }
-
-        .actions {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin-bottom: 40px;
-        }
-
-        .btn {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.7rem;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            padding: 10px 20px;
-            text-decoration: none;
-            transition: all 0.15s;
-        }
-
-        .btn-primary {
-            background: var(--warm);
-            color: var(--paper);
-            border: 1px solid var(--warm);
-        }
-
-        .btn-primary:hover {
-            background: var(--warm-dim);
-            border-color: var(--warm-dim);
-        }
-
-        .btn-ghost {
-            background: transparent;
-            color: var(--ink-light);
-            border: 1px dashed var(--rule-heavy);
-        }
-
-        .btn-ghost:hover {
-            border-style: solid;
-            border-color: var(--ink-faint);
-            color: var(--ink);
-        }
-
-        .receipt-footer {
-            border-top: 2px dashed var(--rule);
-            padding-top: 24px;
-        }
-
-        .barcode {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.85rem;
-            color: var(--ink-faint);
-            letter-spacing: 0.15em;
-            margin-bottom: 16px;
-            opacity: 0.3;
-            word-break: break-all;
-        }
-
-        .meta {
-            font-family: 'Fragment Mono', monospace;
-            font-size: 0.65rem;
-            color: var(--ink-faint);
-            font-style: italic;
-        }
-
-        .meta a {
-            color: var(--ink-light);
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .meta a:hover {
-            color: var(--warm);
-        }
-
-        @media (max-width: 480px) {
-            .actions {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn {
-                text-align: center;
-            }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-            * {
-                transition: none !important;
-            }
-        }
-    </style>
+@media (max-width: 480px) {
+  .topbar { padding: 12px 16px; gap: 10px; }
+  .topbar .tagline { display: none; }
+  .card-404 { padding: 32px 20px; }
+  .actions { flex-direction: column; align-items: stretch; }
+  .btn { text-align: center; justify-content: center; }
+}
+</style>
 </head>
 <body>
-    <div class="receipt">
-        <div class="stamp-void">void</div>
 
-        <div class="code">404</div>
+<header class="topbar">
+  <a href="https://foundry-ethos.pages.dev/" class="brand">
+    <img src="https://raw.githubusercontent.com/AmanCode22/ethos-lang/main/ethos_logo.png" alt="Ethos" class="logo-img" />
+    <span class="wordmark">Ethos Foundry</span>
+  </a>
+  <span class="tagline">Hard traits registry</span>
+  <span class="spacer"></span>
+  <div class="top-links">
+    <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://github.com/AmanCode22" target="_blank" rel="noopener" class="cta">GitHub &nearr;</a>
+  </div>
+</header>
 
-        <div class="divider">trait not found</div>
+<main class="main">
+  <div class="card-404">
+    <div class="stamp-void">void</div>
 
-        <h1>Nothing here</h1>
-        <p class="desc">
-            The path <em id="path-display">this page</em> doesn't exist in the registry or was moved.
-        </p>
+    <div class="code-404">404</div>
 
-        <div class="actions">
-            <a href="https://foundry-ethos.pages.dev/" class="btn btn-primary">cloudflare registry</a>
-            <a href="https://amancode22.github.io/ethos-foundry/" class="btn btn-primary">github registry</a>
-            <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener" class="btn btn-ghost">view source</a>
-        </div>
+    <div class="divider">trait not found</div>
 
-        <div class="receipt-footer">
-            <div class="barcode">|| | ||| | | |||| | || | ||| | | |||</div>
-            <div class="meta">
-                ethos foundry · built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman adlakha</a>
-            </div>
-        </div>
+    <h1>Nothing here</h1>
+    <p class="desc">
+      The path <em id="path-display">/404</em> doesn't exist in the registry or was moved.
+    </p>
+
+    <div class="actions">
+      <a href="https://foundry-ethos.pages.dev/" class="btn btn-primary">Cloudflare Registry</a>
+      <a href="https://amancode22.github.io/ethos-foundry/" class="btn btn-primary">GitHub Registry</a>
+      <a href="https://github.com/AmanCode22/ethos-foundry" target="_blank" rel="noopener" class="btn btn-ghost">View Source</a>
     </div>
 
-    <script>
-        const p = window.location.pathname;
-        if (p && p !== '/') {
-            document.getElementById('path-display').textContent = p;
-        }
-    </script>
+    <div class="receipt-footer">
+      <div class="attribution">
+        ethos foundry &middot; built by <a href="https://github.com/AmanCode22" target="_blank" rel="noopener">aman adlakha</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  const p = window.location.pathname;
+  if (p && p !== '/') {
+    document.getElementById('path-display').textContent = p;
+  }
+</script>
+
 </body>
 </html>
